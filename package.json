@@ -1,0 +1,83 @@
+{
+  "name": "vue3-tiptap-richtext",
+  "version": "0.1.0",
+  "description": "Vue 3 + TipTap v3 富文本编辑器组件库，内置字体/行高/背景色/视频/锚点/分页符/查找替换等自定义工具。基础版免费开源，高级功能见 Pro 套餐。",
+  "type": "module",
+  "license": "MIT",
+  "keywords": [
+    "vue3",
+    "tiptap",
+    "tiptap-v3",
+    "rich-text",
+    "richtext",
+    "editor",
+    "wysiwyg",
+    "ant-design-vue"
+  ],
+  "author": "med",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YOUR_GITHUB_USERNAME/vue3-tiptap-richtext.git"
+  },
+  "homepage": "https://github.com/YOUR_GITHUB_USERNAME/vue3-tiptap-richtext#readme",
+  "bugs": "https://github.com/YOUR_GITHUB_USERNAME/vue3-tiptap-richtext/issues",
+  "files": [
+    "dist"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "main": "./dist/vue3-tiptap-richtext.umd.js",
+  "module": "./dist/vue3-tiptap-richtext.es.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/vue3-tiptap-richtext.es.js",
+      "require": "./dist/vue3-tiptap-richtext.umd.js"
+    },
+    "./style.css": "./dist/style.css"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "build:demo": "vite build --mode demo",
+    "typecheck": "vue-tsc --noEmit -p tsconfig.app.json",
+    "prepublishOnly": "npm run build"
+  },
+  "peerDependencies": {
+    "@tiptap/core": "^3.27.2",
+    "@tiptap/pm": "^3.27.2",
+    "@tiptap/vue-3": "^3.27.2",
+    "ant-design-vue": "^4.2.6",
+    "vue": "^3.5.34"
+  },
+  "dependencies": {
+    "@ant-design/icons-vue": "^7.0.1",
+    "@tiptap/extension-character-count": "^3.27.2",
+    "@tiptap/extension-code-block-lowlight": "^3.27.2",
+    "@tiptap/extension-color": "^3.27.2",
+    "@tiptap/extension-font-family": "^3.27.2",
+    "@tiptap/extension-image": "^3.27.2",
+    "@tiptap/extension-placeholder": "^3.27.2",
+    "@tiptap/extension-table": "^3.27.2",
+    "@tiptap/extension-table-cell": "^3.27.2",
+    "@tiptap/extension-table-header": "^3.27.2",
+    "@tiptap/extension-table-row": "^3.27.2",
+    "@tiptap/extension-text-align": "^3.27.2",
+    "@tiptap/extension-text-style": "^3.27.2",
+    "@tiptap/starter-kit": "^3.27.2",
+    "highlight.js": "^11.11.1",
+    "lowlight": "^3.3.0",
+    "tiptap-extension-global-drag-handle": "^0.1.18"
+  },
+  "devDependencies": {
+    "@types/node": "^24.12.3",
+    "@vitejs/plugin-vue": "^6.0.6",
+    "typescript": "^5.6.3",
+    "vite": "^6.0.0",
+    "vite-plugin-dts": "^4.3.0",
+    "vue": "^3.5.34",
+    "vue-tsc": "^2.1.10"
+  }
+}

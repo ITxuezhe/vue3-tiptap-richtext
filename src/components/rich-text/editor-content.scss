@@ -1,0 +1,212 @@
+/* 编辑区正文排版（替换原 TinyMCE content_style）。
+   直接挂在 .ProseMirror 上，CSS 变量由主题系统提供（见 styles/theme.css 兜底），暗色自动跟随。 */
+.rte-prose {
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-relaxed);
+  color: var(--foreground);
+  background: transparent;
+  padding: 12px 14px;
+  min-height: 100%;
+  outline: none;
+  /* 防止长文本/时间轴等内容撑出横向滚动条：允许在任意字符间断行 */
+  overflow-wrap: break-word;
+  word-break: break-word;
+
+  p {
+    margin: 0 0 12px;
+    line-height: var(--line-height-relaxed);
+  }
+  p:last-child {
+    margin-bottom: 0;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 20px 0 12px;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+  h1 {
+    font-size: var(--font-size-3xl);
+  }
+  h2 {
+    font-size: var(--font-size-xl);
+  }
+  h3 {
+    font-size: var(--font-size-lg);
+  }
+  h4 {
+    font-size: var(--font-size-md);
+  }
+
+  ul,
+  ol {
+    margin: 0 0 12px;
+    padding-left: 24px;
+  }
+  li {
+    margin-bottom: 4px;
+    line-height: var(--line-height-relaxed);
+  }
+
+  blockquote {
+    margin: 0 0 12px;
+    padding: 8px 16px;
+    border-left: 4px solid var(--primary);
+    background: var(--muted);
+    color: var(--muted-foreground);
+  }
+
+  a {
+    color: var(--primary);
+    text-decoration: underline;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0 0 12px;
+    overflow: hidden;
+    table-layout: fixed;
+  }
+  td,
+  th {
+    border: 1px solid var(--border);
+    padding: 6px 10px;
+    position: relative;
+    min-width: 1em;
+    vertical-align: top;
+  }
+  th {
+    background: var(--muted);
+    font-weight: 600;
+  }
+  .selectedCell::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: color-mix(in srgb, var(--primary) 15%, transparent);
+    pointer-events: none;
+  }
+
+  pre {
+    background: var(--muted);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 10px 12px;
+    margin: 0 0 12px;
+    overflow: auto;
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-normal);
+    color: var(--foreground);
+  }
+  code {
+    background: var(--muted);
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-family: var(--font-family-mono);
+    font-size: 90%;
+  }
+  pre code {
+    background: none;
+    padding: 0;
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 16px 0;
+  }
+
+  /* 分页符占位 */
+  hr.rte-page-break {
+    border-top: 1px dashed var(--border);
+    position: relative;
+    &::after {
+      content: '分页符';
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--background);
+      padding: 0 6px;
+      font-size: 11px;
+      color: var(--muted-foreground);
+    }
+  }
+
+  /* 查找高亮 */
+  .rte-search-hit {
+    background: color-mix(in srgb, hsl(45 100% 50%) 35%, transparent);
+    border-radius: 2px;
+  }
+
+  /* 占位符 */
+  p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    float: left;
+    height: 0;
+    pointer-events: none;
+    color: var(--muted-foreground);
+  }
+
+  /* 视频 */
+  video {
+    max-width: 100%;
+    border-radius: 4px;
+    margin: 0 0 12px;
+  }
+}
+
+/* 块级拖拽手柄（tiptap-extension-global-drag-handle 注入 .drag-handle 到 .ProseMirror 的父容器，
+   该扩展此版本不自带 CSS，这里仅提供视觉；扩展使用 getBoundingClientRect() 的视口坐标定位，故 position: fixed。
+   手柄默认出现在 p/li/pre/blockquote/h1~h6 等块级节点左侧，hover 时显示。 */
+.drag-handle {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 24px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background-color: var(--muted);
+  background-image: radial-gradient(color-mix(in srgb, var(--muted-foreground) 70%, transparent) 1px, transparent 1.4px);
+  background-size: 5px 5px;
+  background-position: center;
+  cursor: grab;
+  opacity: 1;
+  z-index: 50;
+  transition: background-color 0.15s ease, border-color 0.15s ease, opacity 0.15s ease;
+
+  &:hover {
+    background-color: color-mix(in srgb, var(--muted) 85%, transparent);
+    border-color: var(--primary);
+  }
+
+  &:active {
+    cursor: grabbing;
+  }
+
+  /* 扩展在隐藏手柄时追加 .hide 类 */
+  &.hide {
+    opacity: 0 !important;
+    pointer-events: none;
+  }
+}
+
+/* 正在拖拽的源节点轻微透明，便于辨识 */
+.ProseMirror.dragging {
+  cursor: grabbing;
+}
