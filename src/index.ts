@@ -1,8 +1,12 @@
 // 主题变量兜底：引入后保证开箱即用（宿主已提供同名变量时可不引入，但重复引入无害）
 import './styles/theme.css'
 
-// 主组件
-export { default as RichTextEditor } from './RichTextEditor.vue'
+import RichTextEditor from './RichTextEditor.vue'
+
+// 默认导出（import RichTextEditor from 'vue3-tiptap-richtext'）
+export default RichTextEditor
+// 具名导出（import { RichTextEditor } from 'vue3-tiptap-richtext'）
+export { RichTextEditor }
 
 // 工具栏按钮预设与类型
 export {

@@ -25,7 +25,7 @@ export default defineConfig(({ command, mode }) => {
         lib: {
           entry: fileURLToPath(new URL('./src/index.ts', import.meta.url)),
           name: 'Vue3TiptapRichtext',
-          formats: ['es', 'umd'],
+          formats: ['es'],
           fileName: (format) => `vue3-tiptap-richtext.${format}.js`,
           // 抽取出的样式文件名，须与 package.json 的 exports["./style.css"] 对应
           cssFileName: 'style',
@@ -44,19 +44,6 @@ export default defineConfig(({ command, mode }) => {
             'highlight.js',
             'tiptap-extension-global-drag-handle',
           ],
-          output: {
-            globals: {
-              vue: 'Vue',
-              'ant-design-vue': 'antd',
-              '@ant-design/icons-vue': 'iconsVue',
-              '@tiptap/core': 'tiptapCore',
-              '@tiptap/vue-3': 'tiptapVue3',
-              '@tiptap/pm': 'tiptapPm',
-              lowlight: 'lowlight',
-              'highlight.js': 'hljs',
-              'tiptap-extension-global-drag-handle': 'GlobalDragHandle',
-            },
-          },
         },
       },
     }
