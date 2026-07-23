@@ -51,6 +51,9 @@ export default defineConfig(({ command, mode }) => {
 
   // dev 预览 / 构建 demo 站点
   return {
+    // GitHub Pages 部署在子路径 /vue3-tiptap-richtext/ 下，
+    // 构建 demo 时须加 base 前缀，否则 JS/CSS 会以根路径 /assets/ 请求导致 404。
+    base: command === 'build' ? '/vue3-tiptap-richtext/' : '/',
     plugins: [vue()],
     build: {
       outDir: 'dist-demo',
