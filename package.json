@@ -17,10 +17,10 @@
   "author": "med",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/YOUR_GITHUB_USERNAME/vue3-tiptap-richtext.git"
+    "url": "git+https://github.com/ITxuezhe/vue3-tiptap-richtext.git"
   },
-  "homepage": "https://github.com/YOUR_GITHUB_USERNAME/vue3-tiptap-richtext#readme",
-  "bugs": "https://github.com/YOUR_GITHUB_USERNAME/vue3-tiptap-richtext/issues",
+  "homepage": "https://github.com/ITxuezhe/vue3-tiptap-richtext#readme",
+  "bugs": "https://github.com/ITxuezhe/vue3-tiptap-richtext/issues",
   "files": [
     "dist"
   ],
